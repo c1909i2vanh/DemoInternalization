@@ -20,11 +20,15 @@ public class LoginController {
     private static LoginView loginView;
 
     public LoginController() {
+        //Khởi tạo thực thể LoginView khi LoginController được khởi tạo
         loginView = new LoginView();
     }
 
     public void showLoginView() {
+        // Vì login view ko có hàm main nên phải setVisible  true cho Login View
+        //  Chạy method showLoginView  để hiện Login VIew 
         loginView.showLoginView();
+        //Truyền sự kiện được triển khai từ interface ActionListener sang bên Login View
         loginView.addMyLocaleStateChanged(new MyLocaleStateChanged());
     }
 

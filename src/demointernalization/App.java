@@ -27,7 +27,9 @@ public class App {
                 } catch (InterruptedException ex) {
                     Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                //Khởi tạo LoginController
                 LoginController mainController = new LoginController();
+                // CHạy phương thức showLoginView
                 mainController.showLoginView();
                
             }

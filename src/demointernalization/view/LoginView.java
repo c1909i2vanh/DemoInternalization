@@ -21,23 +21,29 @@ public class LoginView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
+    // dặtd biến Locale toàn cục
     private static Locale local;
+    // đặt biến ResourcesBundle toàn cục
     private static ResourceBundle bundle = null;
 
     public LoginView() {
-        this.local = getMyLocale();
+        //set Locale cho App
+        LoginView.local = getMyLocale();
+        //Set ResourceBundle cho App
         setResourceBundle();
-
+        // Khởi tạo view
         initComponents();
     }
 
     private Locale getMyLocale() {
+        // set Locale theo file config.properties
         ResourceBundle bundle1 = ResourceBundle.getBundle("demointernalization/config/config");
         Locale myLocale = new Locale(bundle1.getString("lang"), bundle1.getString("country"));
         return myLocale;
     }
 
     private void setResourceBundle() {
+        //Set Resources Bundle theo local 
         bundle = ResourceBundle.getBundle("demointernalization/config/resources", local);
     }
 
@@ -133,37 +139,7 @@ public class LoginView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LoginView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LoginView().setVisible(true);
-            }
-        });
-    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox chkBoxMyLocale;
@@ -176,13 +152,17 @@ public class LoginView extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public void showLoginView() {
+        //Hiện View Login bằng method SetVisible
         this.setVisible(true);
     }
 
     public void addMyLocaleStateChanged(ActionListener listener) {
+        //thêm sự kiện ActionListener cho comboBox
         chkBoxMyLocale.addActionListener(listener);
     }
-    public String getMyLocaleInCombobox(){
-        return (String)chkBoxMyLocale.getSelectedItem();
+
+    public String getMyLocaleInCombobox() {
+        // Trả về Item của combobox đang được chọn
+        return (String) chkBoxMyLocale.getSelectedItem();
     }
 }
