@@ -6,6 +6,8 @@
 package demointernalization;
 
 import demointernalization.controller.LoginController;
+import demointernalization.view.LoginView;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
@@ -28,7 +30,8 @@ public class App {
                     Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 //Khởi tạo LoginController
-                LoginController mainController = new LoginController();
+                LoginView loginView = new LoginView(new Locale("vi","VN"));
+                LoginController mainController = new LoginController(loginView);
                 // CHạy phương thức showLoginView
                 mainController.showLoginView();
                

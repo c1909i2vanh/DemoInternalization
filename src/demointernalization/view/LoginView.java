@@ -24,13 +24,16 @@ public class LoginView extends javax.swing.JFrame {
     // dặtd biến Locale toàn cục
     private static Locale local;
     // đặt biến ResourcesBundle toàn cục
-    private static ResourceBundle bundle = null;
+    private static ResourceBundle bundle;
 
-    public LoginView() {
+    public LoginView(Locale lca) {
         //set Locale cho App
-        LoginView.local = getMyLocale();
+       
+     
+        // System.out.println("hien tai"+ local.getCountry());
         //Set ResourceBundle cho App
-        setResourceBundle();
+        setResourceBundle(lca);
+     
         // Khởi tạo view
         initComponents();
     }
@@ -42,9 +45,16 @@ public class LoginView extends javax.swing.JFrame {
         return myLocale;
     }
 
-    private void setResourceBundle() {
+    public void setResourceBundle(Locale locale) {
         //Set Resources Bundle theo local 
-        bundle = ResourceBundle.getBundle("demointernalization/config/resources", local);
+        bundle = ResourceBundle.getBundle("demointernalization/config/resources", locale);
+        System.out.println("hien tai" + locale.getCountry());
+
+    }
+
+   
+    public void closeLoginView() {
+        this.dispose();
     }
 
     /**
@@ -139,7 +149,6 @@ public class LoginView extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
- 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox chkBoxMyLocale;
@@ -151,7 +160,7 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JLabel lblUserNameLogin;
     // End of variables declaration//GEN-END:variables
 
-    public void showLoginView() {
+    public void showView() {
         //Hiện View Login bằng method SetVisible
         this.setVisible(true);
     }
