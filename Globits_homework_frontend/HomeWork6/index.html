@@ -19,9 +19,7 @@
 
     }
 
-    .fontAwesome {
-      font-family: Helvetica, 'FontAwesome', sans-serif;
-    }
+   
 
     .modal-title {
       width: 100%;
@@ -86,14 +84,26 @@
     }
 
     .group-userName,
-    .group-password {
+    .group-password,
+    .group-btnlogin {
       height: 60px;
+      
     }
-
+    .form-control {
+    font-family: Helvetica, 'FontAwesome', sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;}
     .err-username,
     .err-password {
       font-size: 12px;
       color: red;
+    }
+
+    .message-login {
+      font-size: 12px;
+      color: rgb(32, 43, 184);
+
     }
   </style>
 </head>
@@ -126,20 +136,23 @@
             </div>
             <div class="form-body">
               <div class="form-group group-userName">
-                <input type="text" class="form-control fontAwesome" id="username" placeholder="&#xf2bd;  Username"
+                <input type="text" class="form-control fontAwesome" id="username" placeholder="&#xf007;  Username"
                   name="field1">
                 <span class="err-username"></span>
               </div>
               <div class="form-group group-password">
-                <input type="password" class="form-control fontAwesome" id="password" placeholder="&#xf23e;  Password"
+                <input type="password" class="form-control fontAwesome" id="password" placeholder="&#xf023;  Password"
                   name="field2">
                 <span class="err-password"></span>
 
               </div>
-              <div class="form-group">
+              <div class="form-group group-btnlogin">
+
                 <button type="button" class="btn_login fontAwesome " id="btnLoginInForm">
                   Login
                 </button>
+
+                <span class="message-login"></span>
               </div>
             </div>
           </form>
@@ -175,61 +188,70 @@
       var saveNewPassSuccess = false;
       var inputOldPassword = "OldPassword";
       var inputNewPassword = "NewPassword";
+      var isChangePass = false;
       $("#btnLoginInForm").on('click', function () {
         var textOfField1 = $("#username").val();
         var textOfField2 = $("#password").val();
-        var btnLoginInformClass = $("#btnLoginInForm").hasClass("fa-plus fa-spinner");
-        $("#btnLoginInForm").text("");
-        $("#btnLoginInForm").addClass("fa-plus fa-spinner");
-
-
-
-
-        errorUserName = (textOfField1 == "" ? "Vui lòng nhập tên đăng nhập" : "");
-        if (textOfField2 == "") {
-          errorPassword = "Vui lòng nhập mật khẩu";
-        } else {
-          if (textOfField1 !== username || textOfField2 !== password) {
-            errorPassword = "Tài khoản hoặc mật khẩu không đúng";
+        if (isChangePass == true) {
+          errorPassword = (textOfField2 == "" ? "Bắt buộc nhập" : "");
+          if (textOfField1 == "") {
+            errorUserName = "Bắt buộc nhập";
           } else {
-            errorPassword = "";
-            loginSuccess = true;
+            if (textOfField1 !== textOfField2) {
+              errorUserName = "Password không đúng";
+            } else {
+              errorUserName = "";
+              saveNewPassSuccess = true;
+              password = textOfField2;
+            }
+          }
+          $(".err-username").text(errorUserName);
+          $(".err-password").text(errorPassword);
+          if (saveNewPassSuccess == true) {
+            $("#username").val('')
+            $("#password").val('')
+
+            $("#username").attr('placeholder', '\uf007   Username')
+            $("#password").attr('placeholder', ' \uf023  Password')
+
+            $(".message-login").text("Bạn đã đổi mật khẩu thành công");
+            isChangePass = false;
+          }
+        } else {
+       
+          errorUserName = (textOfField1 == "" ? "Vui lòng nhập tên đăng nhập" : "");
+
+          if (textOfField2 == "") {
+            errorPassword = "Vui lòng nhập mật khẩu";
+          } else {
+            if (textOfField1 !== username || textOfField2 !== password) {
+
+              errorPassword = "Tài khoản hoặc mật khẩu không đúng";
+
+            } else {
+              errorPassword = "";
+              loginSuccess = true;
+            }
+
+          }
+          $(".err-username").text(errorUserName);
+          $(".err-password").text(errorPassword);
+          if (loginSuccess == true) {
+            $(".loginModal").modal('hide');
+            $("#btnLogin").text("Đăng nhập thành công")
           }
 
         }
-        $(".err-username").text(errorUserName);
-        $(".err-password").text(errorPassword);
-        if (loginSuccess == true) {
-          $(".loginModal").modal('hide');
-          $("#btnLogin").text("Đăng nhập thành công")
-        }
       });
       $("#forgot-password").on('click', function () {
+        isChangePass = true;
         var textOfField1 = $("#username").val();
         var textOfField2 = $("#password").val();
         $("#btnLoginInForm").removeClass("fa-plus fa-spinner");
         $("#username").attr('placeholder', inputNewPassword)
         $("#password").attr('placeholder', inputOldPassword)
         $("#btnLoginInForm").text("Save");
-        errorPassword = (textOfField2 == "" ? "Bắt buộc nhập" : "");
-        if (textOfField1 == "") {
-          errorUserName = "Bắt buộc nhập";
-        } else {
-          if (textOfField1 !== textOfField2) {
-            errorUserName = "Password không đúng";
-          } else {
-            errorUserName = "";
-            saveNewPassSuccess = true;
-            password = textOfField2;
-          }
-        }
-        $(".err-username").text(errorUserName);
-        $(".err-password").text(errorPassword);
-        if (saveNewPassSuccess == true) {
-          $("#username").attr('placeholder', "&#xf2bd;  Username")
-        $("#password").attr('placeholder'," &#xf23e;  Password")
-        
-        }
+
 
       });
     });
