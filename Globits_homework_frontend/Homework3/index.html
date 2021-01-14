@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bài tập 3</title>
+
+  <style>
+    /* Loại bỏ margin và padding của các phần tử bên trong body */
+    html,
+    body {
+
+      padding: 0;
+      margin: 0;
+    }
+
+
+    /* Khi màn hình co về dưới 780 pixel thì  chỉnh chiều rộng cho các phần tử
+         vì chiẻu rộng của phần tử A4 được dặt theo % kích thước A1
+       nên chỉ cẩn cập nhật phần tử cha bên ngoài là đủ
+     */
+    @media only screen and (max-width: 780px) {
+      .A1 {
+        width: 500px !important;
+      }
+
+      /* Cập nhật kích thước mới cho phần tử A2, A3 */
+      .A2,
+      .A3 {
+        width: 200px !important;
+
+      }
+      .A5{
+        width: 200px !important;
+      }
+      .A6{
+        width: 100px !important;
+      }
+    }
+
+    /* Thiết lập chiều cao, chiều rộng, và đường viền cho phần tử A1 */
+    .A1 {
+      width: 1000px;
+      height: 2000px;
+      border: 3px solid red;
+    }
+
+    /* Thiết lập thông số cho phần tử A2 
+    
+    */
+    .A2 {
+      height: 120px;
+      width: 400px;
+      border: 5px solid rgb(134, 24, 24);
+      /* Thiết lập vị trí cố định cho phần tử A2 để khi trình duyệt chuyển động 
+       thì A2 không bị tác động  với độ cao tính từ trẻn đỉnh phần tử cha là 0 và bên trái là 0 */
+      position: fixed;
+      top: 0;
+      left: 0;
+
+
+    }
+
+    .A3 {
+      height: 120px;
+      width: 400px;
+      border: 5px solid rgb(236, 113, 42);
+      /* Thiết lập vị trí cố định cho phần tử A3 để khi trình duyệt chuyển động 
+       thì A2 không bị tác động  với độ cao tính từ  phía dưới phần tử cha là 0 và bên trái là 0 */
+      position: fixed;
+      bottom: 0;
+      left: 0;
+    }
+   /* 
+        Thiết lập thông số cho phần tử A4
+        position relative : cho phép các phần từ con có thể thiết lập vị trí theo phần tử này
+        display flex  giúp sắp xếp bố cục các thành phần khối bên trong
+        align-items: center giúp các phần tử con luôn nào tại vị trí bên trong phần tử cha
+            
+         */
+    .A4 {
+   
+      top: 130px;
+      position: relative;
+      height: 75%;
+      width: 90%;
+      border: 5px solid rgb(45, 132, 190);
+      display: flex;
+      align-items: center;
+
+
+    }
+   /* 
+        Thiết lập thông số cho phần tử A5
+        position fixed :  ngăn phần tử di chuyển khi scroll page
+        display flex  giúp sắp xếp bố cục các thành phần khối bên trong
+        align-items: center giúp các phần tử con luôn nào tại vị trí bên trong phần tử cha
+        justify-content: center  căn giữa cho phần tử con bên trong
+           margin-left:  giữ khoảng cách bên trái so với phần tử cha
+         */
+    .A5 {
+
+      border: 5px solid rgb(151, 48, 155);
+      height: 200px;
+      position: fixed;
+      margin-left: 200px;
+      width:500px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .A6 {
+
+      border: 5px solid yellow;
+      height: 50%;
+      width:200px;
+    }
+/* Phần tử A7 thêm vào để tạo điều kiện test scroll */
+    .A7 {
+      height: 1500px;
+      width: 200px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container clearfix">
+    <div class="A1">
+      <div class="A4">
+        <div class="A5">
+
+          <div class="A6">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="A2"></div>
+  <div class="A3"></div>
+  <div class="clearfix"></div>
+
+
+  <div class="A7"> </div>
+</body>
+<!-- Link tới thư viện  jquery để sử dụng được jquery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  // Chỉnh trình duyệt về đầu trang sau mỗi lần reload
+  $(window).on('beforeunload', function () {
+    $('body').hide();
+    $(window).scrollTop(0);
+  });
+  // Lấy kích thước màn hình hiện tại
+  var heightOfScreen = $(window).height();
+  // lấy chiều cao của phần tử a5
+  var a5Height = $(".A5").height();
+  // Tính vị trí của phần tử A5 sao cho luôn ở giữa màn hình
+  var a5TopPosition = heightOfScreen / 2 - a5Height / 2;
+  $(window).on('load', function () {
+    $(".A5").css({
+      'top': a5TopPosition
+    });
+  });
+
+/* Lấy các số đo của 2 phần tử A4 và A5 để  tính vị trí
+   khi scroll trang 2 phần tử sẽ chạm nhau
+  */
+  var a4Top = $(".A4").offset().top;  // trả về giá trị  top của phần tử A4
+  var a4Left = $(".A4").offset().left;
+
+  var a5Top = $(".A5").offset().top; // trả về giá trị  top của phần tử A5
+
+  var a4Height = $(".A4").height();
+  var a5Height = $(".A5").height();
+
+  var a4Bottom = a4Height + a4Top;  // trả về giá trị  bottom của phần tử A4
+  var a5Bottom = a5Height + a5TopPosition; // 
+  // Khoảng cách  từ bottom a4 đến bottom a5 
+  var distanceFromBottomA4ToA5 = a4Bottom - a5Bottom;
+  /* Giá trị phần đỉnh của phần tử A5  khi  trang cuộn xuống
+    được tính bẳng chiều cao của A4 - chiều cao của A5(vì A5 luôn nằm bên trong A4)
+    trừ đi 5px border A4
+  */
+  var newValueInTopOfA5 = a4Height - a5Height - 5;
+  $(window).scroll(function () {
+    /* Nếu độ dài con lăn lớn hơn với khoảng cách giữa  bottom  của A4 và A5
+        là khi mà khoảng cách giữa 2 bottom bằng 0
+    */
+    if ($(window).scrollTop() > distanceFromBottomA4ToA5 - 10) {
+      /*  Thiết lập vị trí cho Phần tử A5
+        position absolute để A5 di chuyển theo phần tử cha là A4
+      */
+      $(".A5").css({
+        'position': 'absolute',
+        'top': newValueInTopOfA5 + 'px'
+      });
+
+ 
+    } else {
+      // Trả lại giá trị các thuộc tính của phần tử A5 như thiết lập ban đầu
+      $(".A5").css({
+        'position': 'fixed',
+        'top': a5TopPosition    
+      });
+     
+ 
+    }
+
+  });
+
+</script>
+
+</html>

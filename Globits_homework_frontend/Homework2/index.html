@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sự khác nhau giữa Inline Element và Block Element</title>
+  <style>
+    .container1 ,   .container2{
+      height:300px;
+      width: 600px;
+      margin-bottom: 20px;
+      
+    }
+    .container1{
+      border: 1px solid #cccccc;
+    }
+    .container2 {
+      
+      border: 1px solid black;
+
+    }
+    .block-element ,.inline-element{
+      background-color: #ccc;
+
+    }
+  </style>
+</head>
+<body>
+  <div class = container1>
+    <h1> Block element</h1>
+    <p >Là các phần tử luôn được viết trên 1 dòng mới và không xếp chồng lên nhau</p>
+    <p class="block-element" >Dòng đầu tiên</p>
+    <p class="block-element">Dòng thứ 2</p>
+
+  </div>
+  <div class = container2>
+    <h1> Inline element</h1>
+    <p>Là các phần tử không được viết trên 1 dòng mới và chiều rộng  của nó bằng nội dung của chính nó</p>
+  <span class="inline-element">Thẻ đầu tiên</span>
+  <span class="inline-element">Thẻ  số 2</span>
+
+  </div>
+</body>
+</html>

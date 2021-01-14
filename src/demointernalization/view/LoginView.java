@@ -32,8 +32,9 @@ public class LoginView extends javax.swing.JFrame {
      
         // System.out.println("hien tai"+ local.getCountry());
         //Set ResourceBundle cho App
-        setResourceBundle(lca);
-     
+      //  setResourceBundle(lca);
+        Locale.setDefault(new Locale("vi","VN"));
+        setResourceBundle(Locale.getDefault());
         // Khởi tạo view
         initComponents();
     }

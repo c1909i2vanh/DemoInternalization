@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Các khái niệm HTML Form</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+
+    }
+    .form-control{
+      margin:0  0 20px 0;
+      width: 100%;
+        display:block;
+        height:20px;
+    }
+     .label{
+      width: 30%;
+      display: block;
+      float: left;
+    }
+    .input{
+      width:65%;
+      display: block;
+      float: left;
+    }
+    .form-container{
+      margin: 50px auto;
+      padding:0;
+      width:720px;
+
+    }
+    .btn-success{
+margin: auto;
+      padding: 7px;
+    background-color:aquamarine;
+    border: 1px solid transparent;
+
+    }
+    .btn-success:hover{
+      background-color:blue;
+
+    }.center{
+
+      display: flex;
+  justify-content: center;
+  align-items: center;
+    }
+    ul li{
+
+      float:left;
+      width: 20px;
+      text-decoration: none;
+      list-style-type: none;
+      background-color:rgb(147, 231, 147);
+      margin-right: 5px;
+      text-align: center;
+    }
+    ul li:hover{
+      background-color:rgb(46, 46, 99); 
+      color:white;
+    }
+  </style>
+</head>
+
+<body>
+  <div class ="form-container">
+  <h1 style="margin-bottom:50px;text-align:center">Form cơ bản</h1>
+  <form action="" method="get" class="form">
+    <div class="form-control">
+      <label class="label" for="">Name</label>
+      <input class="input" type="text" placeholder="Nhập tên"name="name">
+    </div>
+    <div class="form-control">
+      <label class="label" for="">Tuổi</label>
+      <input class="input" type="text" placeholder="Nhập tuổi" name ="age">
+    </div>
+    <div class="form-control">
+      <label class="label" for="">Password</label>
+      <input class="input" type="password" placeholder="Nhập Password"name="password">
+    </div>
+    <div class="form-control center">
+    <button class="btn btn-success" type="submit">Send</button>
+    </div>
+  </form>
+</div>
+</body>
+<ul>
+  <li class="list">1</li>
+  <li class="list">2</li>
+  <li class="list">3</li>
+  <li class="list">4</li>
+  <li class="list">5</li>
+  <li class="list">6</li>
+</ul>
+</html>

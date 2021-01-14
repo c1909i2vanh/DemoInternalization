@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Các kiểu Css</title>
+  <style>
+    .form-control{
+ 
+      width: 500px;
+      margin:20px 0 auto;
+      display:flex;
+      justify-content:center;
+      align-items: center;
+    }
+    .internal-css{
+      color:green;
+      font-weight:bold;
+      font-size: 32px;
+
+    }
+
+  </style>
+  <link rel="stylesheet" href="./external.css">
+</head>
+<body>
+   <div  class="form-control">
+      <p style="color:red;font-size:34px" >Đây là Inline Css</p>
+
+   </div>
+   <div  class="form-control">
+    <p class="internal-css" >Đây là Internal Css</p>
+
+ </div>
+ <div  class="form-control">
+  <p class="external-css" >Đây là External Css</p>
+
+</div>
+</body>
+</html>
