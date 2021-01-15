@@ -8,9 +8,6 @@ package barchart;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Line2D;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -21,8 +18,8 @@ import javax.swing.JPanel;
  *
  * @author Windows 10
  */
-public class BarChart extends JPanel {
 
+public class BarChartLine extends JPanel {
     private static Map<Color, Integer> bars
             = new LinkedHashMap<Color, Integer>();
     private int max = 1;
@@ -30,6 +27,14 @@ public class BarChart extends JPanel {
     private final int[] markedColumn = {value * 1, value * 10, value * 100, value * 1000, value * 10000};
     private Dimension dimension;
 
+    public BarChartLine() {
+       
+    }
+
+    public void setDimension(Dimension dimension) {
+        this.dimension = dimension;
+    }
+    
     /**
      * 17. Add new bar to chart 18.
      *
@@ -48,7 +53,7 @@ public class BarChart extends JPanel {
 
 // paint bars
         int width = (getWidth() / bars.size()) - 2;
-        int x = 10;
+        int x = 1;
         for (Color color : bars.keySet()) {
             int value = bars.get(color);
             float ratio = 0.20f;
@@ -77,8 +82,9 @@ public class BarChart extends JPanel {
             g.fillRect(x, y, width, height);
             g.setColor(Color.black);
             g.drawRect(x, y, width, height);
-            g.drawString("a", x + (width
-                    / 2), y - 5);
+            g.drawLine(0, 0, x, y);
+            g.drawString("", x + (width
+                    / 2),   y -5);
             x += (width + 2);
         }
     }
@@ -87,20 +93,14 @@ public class BarChart extends JPanel {
 
     public Dimension getPreferredSize() {
 
-        return new Dimension(bars.size() * 30 + 2, 200);
+        return new Dimension(bars.size() * 1 , 300);
     }
 
     public static void main(String[] args) {
         JFrame frame = new JFrame("Bar Chart");
-        BarChart chart = new BarChart();
-        chart.addBar(Color.red, 1000000);
-        chart.addBar(Color.green, 8);
-        chart.addBar(Color.blue, 54);
-        chart.addBar(Color.black, 23);
-        chart.addBar(Color.yellow, 23);
-        chart.addBar(Color.black, 23);
-        chart.addBar(Color.black, 23);
-
+        BarChartLine chart = new BarChartLine();
+        chart.addBar(Color.black, 1000000);
+      
         frame.getContentPane().add(chart);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
